@@ -4,6 +4,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import styles from "./Main.module.scss";
 
 const cardsInfo = [
   {
@@ -25,19 +26,21 @@ const cardsInfo = [
 
 const Main = () => {
   const renderedCards = cardsInfo.map((info) => (
-    <Card>
-      <CardContent>
-        <Typography>{info.title}</Typography>
-        <Typography>{info.subTitle}</Typography>
-        <Typography>{info.date}</Typography>
-      </CardContent>
-      <CardActions>
-        <Button>Войти</Button>
-      </CardActions>
-    </Card>
+    <div className={styles.cardWrapper}>
+      <Card className={styles.card}>
+        <CardContent>
+          <Typography>{info.title}</Typography>
+          <Typography>{info.subTitle}</Typography>
+          <Typography>{info.date}</Typography>
+        </CardContent>
+        <CardActions>
+          <Button>Войти</Button>
+        </CardActions>
+      </Card>
+    </div>
   ));
 
-  return <div>{renderedCards}</div>;
+  return <div className={styles.cardsWrapper}>{renderedCards}</div>;
 };
 
 export default Main;
