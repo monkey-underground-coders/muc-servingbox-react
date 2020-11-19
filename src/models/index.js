@@ -1,6 +1,13 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import testReducer from "./test/slice";
+import { all } from "redux-saga/effects";
 
-export const rootLevelReducer = combineReducers({
+import testReducer from "./test/slice";
+import testSagas from "./test/sagas";
+
+export const rootReducer = combineReducers({
   test: testReducer,
 });
+
+export default function* rootSaga() {
+  yield all([testSagas()]);
+}
