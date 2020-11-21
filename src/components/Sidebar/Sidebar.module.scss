@@ -26,3 +26,35 @@
   width: 20px;
   height: 20px;
 }
+
+// MODAL
+
+.auth {
+  background-color: white;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.authHeader {
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+  filter: drop-shadow(1px 0px 4px rgba(211, 217, 222, 0.25));
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  > * {
+    margin-top: 15px;
+  }
+}
+
+.footer {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}

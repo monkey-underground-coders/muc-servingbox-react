@@ -40,7 +40,11 @@ const Main = () => {
     </div>
   ));
 
-  return <div className={styles.cardsWrapper}>{renderedCards}</div>;
+  return (
+    <>
+      <div className={styles.cardsWrapper}>{renderedCards}</div>
+    </>
+  );
 };
 
 export default Main;
