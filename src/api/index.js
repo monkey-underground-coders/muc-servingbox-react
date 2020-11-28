@@ -1,1 +1,1 @@
-export const api = "api";
+export * from "./auth";

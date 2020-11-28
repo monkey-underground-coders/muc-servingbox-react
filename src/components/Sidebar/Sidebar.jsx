@@ -3,19 +3,21 @@ import styles from "./Sidebar.module.scss";
 import folders from "assets/icons/folders.svg";
 import lessons from "assets/icons/lessons.svg";
 import resources from "assets/icons/resources.svg";
+import database from "assets/icons/database.svg";
 import TransitionModal from "components/TransitionModal/TransitionModal";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { useDispatch } from "react-redux";
+import { actions } from "models/auth/slice";
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
   const [modalState, changeModalState] = useState(false);
   const [modalInputState, changeModalInputState] = useState({
     username: "",
     password: "",
   });
-
-  console.log(modalInputState);
 
   const modalStateHandler = (e) => {
     changeModalInputState({
@@ -28,23 +30,53 @@ const Sidebar = () => {
     changeModalState(true);
   };
 
+  const sendData = React.useCallback(() => {
+    const data = modalInputState.username + ":" + modalInputState.password;
+    dispatch({
+      type: actions.getTokens,
+      payload: { data },
+    });
+  }, [dispatch, modalInputState]);
+
   return (
-    <div className={styles.sidebar}>
-      <div className={styles.sidebarHeader} onClick={openMolal}>
-        Ученик
+    <div className={styles.root}>
+      <div className={styles.sidebarHeader}>
+        <Button variant="contained" color="primary" onClick={openMolal}>
+          Войти
+        </Button>
       </div>
       <div className={styles.sidebarBody}>
         <div className={styles.sidebarBodyItem}>
-          <i className={styles.sidebarBodyItemIcon} src={lessons} />
+          <img
+            className={styles.sidebarBodyItemIcon}
+            src={lessons}
+            alt="lessons"
+          />
           <div className={styles.sidebarBodyItemTitle}>Уроки</div>
         </div>
         <div className={styles.sidebarBodyItem}>
-          <i className={styles.sidebarBodyItemIcon} src={folders} />
+          <img
+            className={styles.sidebarBodyItemIcon}
+            src={folders}
+            alt="folders"
+          />
           <div className={styles.sidebarBodyItemTitle}>Мои папки</div>
         </div>
         <div className={styles.sidebarBodyItem}>
-          <i className={styles.sidebarBodyItemIcon} src={resources} />
+          <img
+            className={styles.sidebarBodyItemIcon}
+            src={resources}
+            alt="resorces"
+          />
           <div className={styles.sidebarBodyItemTitle}>Общие ресурсы</div>
+        </div>
+        <div className={styles.sidebarBodyItem}>
+          <img
+            className={styles.sidebarBodyItemIcon}
+            src={database}
+            alt="database"
+          />
+          <div className={styles.sidebarBodyItemTitle}>Шаблоны уроков</div>
         </div>
         <TransitionModal isOpen={modalState} openHandler={changeModalState}>
           <div className={styles.auth}>
@@ -72,7 +104,7 @@ const Sidebar = () => {
               />
             </div>
             <div className={styles.footer}>
-              <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" onClick={sendData}>
                 Войти
               </Button>
             </div>

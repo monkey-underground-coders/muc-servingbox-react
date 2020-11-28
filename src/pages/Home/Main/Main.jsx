@@ -5,6 +5,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styles from "./Main.module.scss";
+import { useSelector } from "react-redux";
+import { refreshTokenSelector } from "models/auth/selectors";
 
 const cardsInfo = [
   {
@@ -25,6 +27,10 @@ const cardsInfo = [
 ];
 
 const Main = () => {
+  const refreshToken = useSelector(refreshTokenSelector);
+
+  console.log(refreshToken);
+
   const renderedCards = cardsInfo.map((info) => (
     <div className={styles.cardWrapper}>
       <Card className={styles.card}>

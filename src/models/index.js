@@ -1,13 +1,13 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { all } from "redux-saga/effects";
 
-import testReducer from "./test/slice";
-import testSagas from "./test/sagas";
+import authReducer from "./auth/slice";
+import authSagas from "./auth/sagas";
 
 export const rootReducer = combineReducers({
-  test: testReducer,
+  auth: authReducer,
 });
 
 export default function* rootSaga() {
-  yield all([testSagas()]);
+  yield all([authSagas()]);
 }
