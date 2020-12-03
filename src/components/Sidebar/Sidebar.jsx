@@ -83,31 +83,38 @@ const Sidebar = () => {
             <Typography align="center" color="primary" variant="h5">
               Авторизация
             </Typography>
-            <div className={styles.inputs}>
-              <TextField
-                label="Имя пользователя"
-                name="username"
-                color="primary"
-                type="text"
-                value={modalInputState["username"]}
-                onChange={modalStateHandler}
-                required
-              />
-              <TextField
-                label="Пароль"
-                name="password"
-                type="password"
-                color="primary"
-                onChange={modalStateHandler}
-                value={modalInputState["password"]}
-                required
-              />
-            </div>
-            <div className={styles.footer}>
-              <Button variant="contained" color="primary" onClick={sendData}>
-                Войти
-              </Button>
-            </div>
+            <form onSubmit={(e) => e.preventDefault()}>
+              <div className={styles.inputs}>
+                <TextField
+                  label="Имя пользователя"
+                  name="username"
+                  color="primary"
+                  type="text"
+                  value={modalInputState["username"]}
+                  onChange={modalStateHandler}
+                  required
+                />
+                <TextField
+                  label="Пароль"
+                  name="password"
+                  type="password"
+                  color="primary"
+                  onChange={modalStateHandler}
+                  value={modalInputState["password"]}
+                  required
+                />
+              </div>
+              <div className={styles.footer}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={sendData}
+                  type="submit"
+                >
+                  Войти
+                </Button>
+              </div>
+            </form>
           </div>
         </TransitionModal>
       </div>
