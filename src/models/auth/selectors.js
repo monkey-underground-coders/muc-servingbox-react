@@ -1,11 +1,11 @@
 import { createSelector } from "reselect";
 
-export const authSlector = createSelector(
+export const authSelector = createSelector(
   (state) => state.auth,
   (auth) => auth
 );
 
 export const refreshTokenSelector = createSelector(
-  authSlector,
+  authSelector,
   ({ tokens }) => tokens
 );
