@@ -5,8 +5,8 @@ import { actions } from "./slice";
 import { generatebase64 } from "utils/genBase64";
 import { setLocalStorage } from "utils/localStorage";
 
-export function* fetchTokens(action) {
-  const encodedData = generatebase64(action.payload.data);
+export function* fetchTokens({ payload }) {
+  const encodedData = generatebase64(payload.data);
 
   try {
     const response = yield call(api.getTokens, encodedData);
