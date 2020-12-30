@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -7,6 +7,10 @@ import Typography from "@material-ui/core/Typography";
 import styles from "./Main.module.scss";
 import { useSelector } from "react-redux";
 import { refreshTokenSelector } from "models/auth/selectors";
+import { actions } from "models/live_lessons/slice";
+import useAction from "hooks/useAction";
+import { liveLessonsEntitiesSelector } from "models/live_lessons/selectors";
+import { Helmet } from "react-helmet-async";
 
 const cardsInfo = [
   {
@@ -27,10 +31,12 @@ const cardsInfo = [
 ];
 
 const Main = () => {
-  const refreshToken = useSelector(refreshTokenSelector);
-
-  console.log(refreshToken);
-
+  const fetchAllLiveLessons = useAction(actions.liveLessonsPageRequest);
+  const liveLessons = useSelector(liveLessonsEntitiesSelector);
+  console.log(liveLessons);
+  useEffect(() => {
+    fetchAllLiveLessons();
+  }, [fetchAllLiveLessons]);
   const renderedCards = cardsInfo.map((info) => (
     <div className={styles.cardWrapper}>
       <Card className={styles.card}>
@@ -48,6 +54,7 @@ const Main = () => {
 
   return (
     <>
+      <Helmet title="Уроки" />
       <div className={styles.cardsWrapper}>{renderedCards}</div>
     </>
   );
