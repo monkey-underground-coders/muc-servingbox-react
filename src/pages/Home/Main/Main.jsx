@@ -12,28 +12,11 @@ import useAction from "hooks/useAction";
 import { liveLessonsEntitiesSelector } from "models/live_lessons/selectors";
 import { Helmet } from "react-helmet-async";
 
-const cardsInfo = [
-  {
-    title: 'Самостоятельная работа по теме "Циклы". For и while',
-    subTitle: "Работа для первой подгруппы",
-    date: "31 января",
-  },
-  {
-    title: 'Самостоятельная работа по теме "Циклы". For и while',
-    subTitle: "Работа для первой подгруппы",
-    date: "31 января",
-  },
-  {
-    title: 'Самостоятельная работа по теме "Циклы". For и while',
-    subTitle: "Работа для первой подгруппы",
-    date: "31 января",
-  },
-];
+const cardsInfo = [];
 
 const Main = () => {
   const fetchAllLiveLessons = useAction(actions.liveLessonsPageRequest);
   const liveLessons = useSelector(liveLessonsEntitiesSelector);
-  console.log(liveLessons);
   useEffect(() => {
     fetchAllLiveLessons();
   }, [fetchAllLiveLessons]);
@@ -55,7 +38,9 @@ const Main = () => {
   return (
     <>
       <Helmet title="Уроки" />
-      <div className={styles.cardsWrapper}>{renderedCards}</div>
+      <div className={styles.cardsWrapper}>
+        {renderedCards.length || <div className={styles.empty}>Нет уроков</div>}
+      </div>
     </>
   );
 };
