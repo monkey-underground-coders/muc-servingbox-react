@@ -26,8 +26,8 @@ const Sidebar = () => {
     });
   };
 
-  const openMolal = () => {
-    changeModalState(true);
+  const openModal = () => {
+    changeModalState(!modalState);
   };
 
   const sendData = React.useCallback(() => {
@@ -36,12 +36,13 @@ const Sidebar = () => {
       type: actions.getTokens,
       payload: { data },
     });
+    openModal();
   }, [dispatch, modalInputState]);
 
   return (
     <div className={styles.root}>
       <div className={styles.sidebarHeader}>
-        <Button variant="contained" color="primary" onClick={openMolal}>
+        <Button variant="contained" color="primary" onClick={openModal}>
           Войти
         </Button>
       </div>
@@ -66,7 +67,7 @@ const Sidebar = () => {
           <img
             className={styles.sidebarBodyItemIcon}
             src={resources}
-            alt="resorces"
+            alt="resources"
           />
           <div className={styles.sidebarBodyItemTitle}>Общие ресурсы</div>
         </div>
