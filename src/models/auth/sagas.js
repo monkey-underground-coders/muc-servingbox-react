@@ -3,9 +3,9 @@ import { put, takeEvery, call } from "redux-saga/effects";
 import * as api from "api";
 import { actions } from "./slice";
 import { generatebase64 } from "utils/genBase64";
-import { setLocalStorage } from "utils/localStorage";
+import { getLocalStorage, setLocalStorage } from "utils/localStorage";
 
-export function* fetchTokens({ payload }) {
+export function* fetchTokensSaga({ payload }) {
   const encodedData = generatebase64(payload.data);
 
   try {
@@ -25,8 +25,27 @@ export function* fetchTokens({ payload }) {
   }
 }
 
+export function* getAccessSaga({ payload }) {
+  try {
+    const refreshToken = payload.refresh || getLocalStorage("refresh");
+    const response = yield call(api.getAccess, refreshToken);
+    yield put({
+      type: actions.getAccessSuccess,
+      payload: {
+        tokens: response.data,
+      },
+    });
+  } catch (err) {
+    yield put({
+      type: actions.getAccessFailure,
+      payload: { err },
+    });
+  }
+}
+
 function* authSagas() {
-  yield takeEvery(actions.getTokens, fetchTokens);
+  yield takeEvery(actions.getTokens, fetchTokensSaga);
+  yield takeEvery(actions.getAccess, getAccessSaga);
 }
 
 export default authSagas;

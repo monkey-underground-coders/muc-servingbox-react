@@ -7,3 +7,16 @@ export const getTokens = (string) =>
       Authorization: `Basic ${string}`,
     },
   });
+
+export const getAccess = (token) =>
+  Req.POST({
+    url: `/auth/get_access`,
+    data: {
+      refreshToken: token,
+    },
+  });
+
+export const getUser = () =>
+  Req.GET({
+    url: `/auth/user`,
+  });

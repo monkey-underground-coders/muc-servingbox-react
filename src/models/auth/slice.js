@@ -21,6 +21,17 @@ const authSlice = createSlice({
       state.fetching = true;
       state.errorMessage = payload.err;
     },
+    getAccess(state) {
+      state.fetching = true;
+    },
+    getAccessSuccess(state, { payload }) {
+      state.fetching = false;
+      state.tokens = payload.tokens;
+    },
+    getAccessFailure(state, { payload }) {
+      state.fetching = false;
+      state.errorMessage = payload.err;
+    },
   },
 });
 
