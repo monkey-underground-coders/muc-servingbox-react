@@ -9,3 +9,8 @@ export const refreshTokenSelector = createSelector(
   authSelector,
   ({ tokens }) => tokens
 );
+
+export const authFetchingSelector = createSelector(
+  authSelector,
+  ({ fetching }) => fetching
+);
