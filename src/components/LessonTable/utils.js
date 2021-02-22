@@ -23,3 +23,12 @@ export const getTableCols = (role) => {
   ];
   return lessonTableCols;
 };
+
+export const tableHeadData = [
+  { id: 0, title: "Статус", align: "left" },
+  { id: 1, title: "Дата", align: "left" },
+  { id: 2, title: "Время", align: "left" },
+  { id: 3, title: "Шаблон", align: "left" },
+  { id: 4, title: "Название", align: "left" },
+  { id: 5, title: "Количество учеников", align: "right" },
+];

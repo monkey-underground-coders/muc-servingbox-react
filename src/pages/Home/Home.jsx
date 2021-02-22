@@ -11,10 +11,11 @@ import Main from "./Main/Main";
 const Home = () => {
   const getAccess = useAction(actions.getAccess);
   const fetching = useSelector(authFetchingSelector);
+
   useEffect(() => {
-    console.log("effect");
     getAccess();
   }, [getAccess]);
+
   return (
     <div className={styles.home}>
       <Sidebar />

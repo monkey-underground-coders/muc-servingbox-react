@@ -26,9 +26,9 @@ const Sidebar = () => {
     });
   };
 
-  const openModal = () => {
+  const openModal = React.useCallback(() => {
     changeModalState(!modalState);
-  };
+  }, [modalState]);
 
   const sendData = React.useCallback(() => {
     const data = modalInputState.username + ":" + modalInputState.password;
@@ -37,7 +37,7 @@ const Sidebar = () => {
       payload: { data },
     });
     openModal();
-  }, [dispatch, modalInputState]);
+  }, [dispatch, modalInputState, openModal]);
 
   return (
     <div className={styles.root}>

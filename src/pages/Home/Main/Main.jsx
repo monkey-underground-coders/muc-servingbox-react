@@ -5,21 +5,24 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styles from "./Main.module.scss";
-import { useSelector } from "react-redux";
-import { refreshTokenSelector } from "models/auth/selectors";
+// import { useSelector } from "react-redux";
+// import { refreshTokenSelector } from "models/auth/selectors";
 import { actions } from "models/live_lessons/slice";
 import useAction from "hooks/useAction";
-import { liveLessonsEntitiesSelector } from "models/live_lessons/selectors";
+// import { liveLessonsEntitiesSelector } from "models/live_lessons/selectors";
 import { Helmet } from "react-helmet-async";
+import LessonTable from "components/LessonTable";
 
 const cardsInfo = [];
 
 const Main = () => {
   const fetchAllLiveLessons = useAction(actions.liveLessonsPageRequest);
-  const liveLessons = useSelector(liveLessonsEntitiesSelector);
+  // const liveLessons = useSelector(liveLessonsEntitiesSelector);
+
   useEffect(() => {
     fetchAllLiveLessons();
   }, [fetchAllLiveLessons]);
+
   const renderedCards = cardsInfo.map((info) => (
     <div className={styles.cardWrapper}>
       <Card className={styles.card}>
@@ -40,6 +43,9 @@ const Main = () => {
       <Helmet title="Уроки" />
       <div className={styles.cardsWrapper}>
         {renderedCards.length || <div className={styles.empty}>Нет уроков</div>}
+      </div>
+      <div className={styles.tableWrapper}>
+        <LessonTable lessons={[]} />
       </div>
     </>
   );

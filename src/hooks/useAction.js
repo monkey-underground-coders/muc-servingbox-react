@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-export default (type) => {
+const useAction = (type) => {
   const dispatch = useDispatch();
 
   const handler = useCallback((payload = {}) => dispatch({ type, payload }), [
@@ -11,3 +11,5 @@ export default (type) => {
 
   return handler;
 };
+
+export default useAction;

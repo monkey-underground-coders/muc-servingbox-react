@@ -14,11 +14,11 @@ const authSlice = createSlice({
       state.fetching = true;
     },
     getTokensSuccess(state, { payload }) {
-      state.fetching = true;
+      state.fetching = false;
       state.tokens = payload.tokens;
     },
     getTokensFailed(state, { payload }) {
-      state.fetching = true;
+      state.fetching = false;
       state.errorMessage = payload.err;
     },
     getAccess(state) {
